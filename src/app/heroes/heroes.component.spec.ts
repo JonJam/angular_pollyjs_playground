@@ -10,18 +10,22 @@ describe('HeroesComponent', () => {
     detectChanges: false,
   });
 
-  // TODO Exact magic here for detectChanged vs whenStable
   // NOTE: This will make real API requests now
   it('renders something', async () => {
     const spectator = createComponent();
 
     // Trigger ngOnInit
+    // https://ngneat.github.io/spectator/docs/testing-components#detectchanges
+    // https://angular.io/api/core/testing/ComponentFixture#detectchanges
+    // https://angular.io/guide/testing-utility-apis#componentfixture-methods
     spectator.detectChanges();
 
-    // Await for promises to resolve
+    // https://angular.io/guide/testing-utility-apis#componentfixture-methods
+    // https://angular.io/guide/testing-components-scenarios#component-with-async-service
+    // Wait for HTTP call
     await spectator.fixture.whenStable();
 
-    // Trigger ngOnInit
+    // Update view with heroes data
     spectator.detectChanges();
 
     // TODO Change to not be snapshot
