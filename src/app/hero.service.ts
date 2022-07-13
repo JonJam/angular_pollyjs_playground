@@ -11,7 +11,8 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class HeroService {
 
-  private heroesUrl = 'api/heroes';  // URL to web api
+  // See https://jsonplaceholder.typicode.com/
+  private heroesUrl = 'https://jsonplaceholder.typicode.com/users';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
