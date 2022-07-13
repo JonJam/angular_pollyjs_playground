@@ -1,8 +1,24 @@
+/** @jest-environment setup-polly-jest/jest-environment-jsdom */
+// TODO Move to jest.config.js
+
 import { createRoutingFactory } from '@ngneat/spectator/jest';
 import {HeroesComponent} from './heroes.component';
 import {AppModule} from '../app.module';
+import {Polly} from '@pollyjs/core';
+import * as XHRAdapter from '@pollyjs/adapter-xhr';
+import * as RESTPersister from '@pollyjs/persister-rest';
+import { setupPolly } from 'setup-polly-jest';
+
+Polly.register(XHRAdapter); // TODO Determine whether angular even uses this
+Polly.register(RESTPersister);
 
 describe('HeroesComponent', () => {
+  let context = setupPolly({
+      adapters: ['xhr'],
+      persister: 'rest',
+      logLevel: 'info' // Log requests to console
+  });
+
   const createComponent = createRoutingFactory({
     component: HeroesComponent,
     imports: [AppModule],
@@ -12,6 +28,8 @@ describe('HeroesComponent', () => {
 
   // NOTE: This will make real API requests now
   it('renders something', async () => {
+    context.polly.configure({ recordIfMissing: true });
+
     const spectator = createComponent();
 
     // Trigger ngOnInit
