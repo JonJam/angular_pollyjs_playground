@@ -3,6 +3,9 @@
 ## Angular app
 Copied from [Tour of Heroes Tutorial](https://angular.io/tutorial/toh-pt6)
 
+# Angular Builders
+https://github.com/just-jeb/angular-builders/tree/master/packages/jest
+
 ## Angular
 https://angular.io/api/core/testing/ComponentFixture#detectchanges
 https://angular.io/guide/testing-utility-apis#componentfixture-methods

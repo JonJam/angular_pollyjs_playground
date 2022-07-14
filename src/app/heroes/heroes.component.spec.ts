@@ -1,23 +1,16 @@
-/** @jest-environment setup-polly-jest/jest-environment-jsdom */
-// TODO Move to jest.config.js
-
 import { createRoutingFactory } from '@ngneat/spectator/jest';
 import {HeroesComponent} from './heroes.component';
 import {AppModule} from '../app.module';
-import {Polly} from '@pollyjs/core';
-import * as XHRAdapter from '@pollyjs/adapter-xhr';
-import * as RESTPersister from '@pollyjs/persister-rest';
 import { setupPolly } from 'setup-polly-jest';
-
-Polly.register(XHRAdapter); // TODO Determine whether angular even uses this
-Polly.register(RESTPersister);
 
 describe('HeroesComponent', () => {
   let context = setupPolly({
-      adapters: ['xhr'],
-      persister: 'rest',
+      // Having to use require imports due to https://github.com/gribnoysup/setup-polly-jest/issues/23
+      adapters: [require('@pollyjs/adapter-xhr')],// TODO Uninstall require('@pollyjs/adapter-node-http')],
+      persister: require('@pollyjs/persister-rest'),
       logLevel: 'info' // Log requests to console
   });
+  // TODO Work out why snapshot failing
 
   const createComponent = createRoutingFactory({
     component: HeroesComponent,
