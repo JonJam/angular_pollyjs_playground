@@ -22,7 +22,7 @@ switch (process.env['POLLY_MODE']) {
 }
 
 function getDefaultRecordingDir() {
-  // Setup using custom jest environment
+  // This is setup using a custom jest environment
   const testPath: string = (global as any).testPath;
 
   return path.relative(
