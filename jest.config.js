@@ -2,5 +2,5 @@
 
 // Test environment copied from: https://netflix.github.io/pollyjs/#/test-frameworks/jest-jasmine?id=supported-test-runners
 module.exports = {
-  testEnvironment: "setup-polly-jest/jest-environment-jsdom",
+  testEnvironment: "./src/test-utils/custom-environment.js",
 };

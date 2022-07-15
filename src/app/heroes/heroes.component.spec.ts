@@ -1,47 +1,10 @@
 import {byRole, createRoutingFactory} from '@ngneat/spectator/jest';
 import {HeroesComponent} from './heroes.component';
 import {AppModule} from '../app.module';
-import { setupPolly } from 'setup-polly-jest';
-import path from 'path';
-import { PollyConfig} from '@pollyjs/core';
-import { MODES } from '@pollyjs/utils'
+import { autoSetupPolly } from '../../test-utils/auto-setup-polly';
 
 describe('HeroesComponent', () => {
-  // TODO move to common script
-  let recordIfMissing = true;
-  let mode: PollyConfig['mode'] = MODES.REPLAY;
-
-  switch (process.env['POLLY_MODE']) {
-    case 'record':
-      mode = MODES.RECORD;
-      break;
-    case 'replay':
-      mode = MODES.REPLAY;
-      break;
-    case 'offline':
-      mode = MODES.REPLAY;
-      recordIfMissing = false;
-      break;
-  }
-
-  let context = setupPolly({
-      recordIfMissing,
-      mode,
-      // Having to use require imports due to https://github.com/gribnoysup/setup-polly-jest/issues/23
-      adapters: [require('@pollyjs/adapter-xhr')],
-      persister: require('@pollyjs/persister-fs'),
-      persisterOptions: {
-       fs: {
-         recordingsDir: path.resolve(__dirname, '__recordings__'),
-       },
-       disableSortingHarEntries: true
-      },
-      flushRequestsOnStop: true,
-      recordFailedRequests: true,
-      // Default level is warn. Useful to see PollyJs Recorded or Replayed logs
-      logLevel: 'info'
-    // TODO Expires setup
-  });
+  const pollyContext = autoSetupPolly();
 
   const createComponent = createRoutingFactory({
     component: HeroesComponent,
@@ -66,7 +29,7 @@ describe('HeroesComponent', () => {
     // await spectator.fixture.whenStable();
     // https://netflix.github.io/pollyjs/#/api?id=flush
     // Need to use this otherwise promises won't resolve until after polly is stopped when test completes
-    await context.polly.flush();
+    await pollyContext.polly.flush();
 
     // Update view with heroes data
     spectator.detectChanges();
