@@ -2,15 +2,19 @@ import {byRole, createRoutingFactory} from '@ngneat/spectator/jest';
 import {HeroesComponent} from './heroes.component';
 import {AppModule} from '../app.module';
 import { autoSetupPolly } from '../../test-utils/auto-setup-polly';
+import {UrlSegment} from '@angular/router';
 
 describe('HeroesComponent', () => {
   const pollyContext = autoSetupPolly();
+
+  const url = [new UrlSegment('/heroes', {})];
 
   const createComponent = createRoutingFactory({
     component: HeroesComponent,
     imports: [AppModule],
     stubsEnabled: false,
     detectChanges: false,
+    url: url
   });
 
   it('renders a list of heroes', async () => {
@@ -45,6 +49,7 @@ describe('HeroesComponent', () => {
       }
 
       return link.textContent.trim();
+
     });
 
     const expected =  [

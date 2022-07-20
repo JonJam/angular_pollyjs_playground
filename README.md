@@ -32,3 +32,6 @@ Setup PollyJS by following:
 
 ## Spotify PollyJS presets
 [Spotify presets for PollyJS](https://github.com/spotify/polly-jest-presets)
+
+## NGRX
+- [Store integration testing](https://ngrx.io/guide/store/testing#integration-testing)
