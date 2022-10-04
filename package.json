@@ -8,8 +8,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "test:record": "POLLY_MODE=record ng test"
+    "test:integration": "ng run angular.io-example:test-integration",
+    "test:integration:record": "POLLY_MODE=record ng run angular.io-example:test-integration"
   },
   "private": true,
   "dependencies": {

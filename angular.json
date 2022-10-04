@@ -86,6 +86,13 @@
           "builder": "@angular-builders/jest:run",
           "options": {
           }
+        },
+        "test-integration": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "configPath": "integration-tests/jest-integration.config.js",
+            "tsConfig": "tsconfig.integration.json"
+          }
         }
       }
     }
