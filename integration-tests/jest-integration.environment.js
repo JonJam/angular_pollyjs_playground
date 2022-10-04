@@ -1,7 +1,7 @@
 // custom-environment
 const SetupPollyJestEnvironment = require('setup-polly-jest/jest-environment-jsdom');
 
-class CustomEnvironment extends SetupPollyJestEnvironment {
+class JestIntegrationEnvironment extends SetupPollyJestEnvironment {
   constructor(config, context) {
     super(config, context);
 
@@ -11,4 +11,4 @@ class CustomEnvironment extends SetupPollyJestEnvironment {
   }
 }
 
-module.exports = CustomEnvironment;
+module.exports = JestIntegrationEnvironment;
